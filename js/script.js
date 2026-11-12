@@ -140,7 +140,7 @@ Hoy deseo que la vida te regale muchísimas razones para sonreír, que nunca te 
 
   preguntaReaccion: "¿Cómo vas?",
   reacciones: [
-    { id: "smile", etiqueta: "Sonriendo", respuesta: "Esa era la meta. Lo demás es decorado." },
+    { id: "smile", etiqueta: "Sonriendo", respuesta: "Me alegro que te guste mucho." },
     { id: "soft", etiqueta: "Un poco blanda", respuesta: "Entonces la carta hizo su trabajo." },
     { id: "cake", etiqueta: "Quiero tarta de verdad", respuesta: "La de la pantalla no alimenta. La de verdad te la debo." }
   ],
