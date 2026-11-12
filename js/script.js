@@ -72,9 +72,8 @@ const CONFIG = {
   tituloRazones: "Más tarde, juntos",
   textoRazones: "Toca cada tarjeta. Es sobre esta noche.",
   botonRazones: "Ahora, el pastel",
-  // Aparece cuando ya se descubrieron las cuatro.
-  // Se lo das a medianoche. Ella ya confirmó y ya conoce el lugar.
-  cierreRazones: "Más tarde nos vemos. Me alegra que vengas.",
+  // Aparece cuando ya se descubrieron las cuatro. Déjalo en "" para no mostrar nada.
+  cierreRazones: "",
   razones: [
     {
       icono: "star",
@@ -564,7 +563,7 @@ function updateReasonButton(justFinished) {
   const status = el("reason-status");
   status.classList.toggle("is-done", done);
   status.textContent = done
-    ? CONFIG.cierreRazones
+    ? CONFIG.cierreRazones || ""
     : `${seen} de ${total}. Toca las tarjetas.`;
   if (justFinished) {
     const button = el("btn-reasons");
