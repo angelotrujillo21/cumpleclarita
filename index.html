@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#fbf6ef">
+  <meta name="description" content="Una sorpresa de cumpleaños para abrir con calma.">
+  <!--
+    Vista previa al compartir (WhatsApp no ejecuta JavaScript).
+    Cámbiala aquí si quieres. No revela la carta.
+  -->
+  <meta property="og:title" content="Tengo una sorpresa para ti">
+  <meta property="og:description" content="Es tu cumpleaños y preparé algo. Ábrelo cuando puedas.">
+  <meta property="og:type" content="website">
+  <title>Una sorpresa para ti</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,620;1,9..144,500;1,9..144,620&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Personaliza el contenido en js/script.js, objeto CONFIG. -->
+  <div class="bg" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="tw"></span>
+    <span class="tw"></span>
+    <span class="tw"></span>
+    <span class="tw"></span>
+    <span class="tw"></span>
+    <span class="tw"></span>
+    <span class="tw"></span>
+    <span class="tw"></span>
+  </div>
+
+  <div class="balloon balloon-a" aria-hidden="true"></div>
+  <div class="balloon balloon-b" aria-hidden="true"></div>
+  <div class="balloon balloon-c" aria-hidden="true"></div>
+  <div id="floaters" aria-hidden="true"></div>
+  <div id="confetti" aria-hidden="true"></div>
+  <div id="party" aria-hidden="true"></div>
+  <div id="flash" aria-hidden="true"></div>
+  <p id="slip" class="slip" role="status"></p>
+
+  <header class="hud-bar">
+    <div class="hud">
+      <button type="button" class="text-btn" id="btn-back" disabled>
+        <span aria-hidden="true">←</span>
+        <span class="back-label">Atrás</span>
+      </button>
+      <div class="hud-center">
+        <div class="timeline" id="progress" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" aria-label="Progreso de la historia">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p class="timeline-label" id="progress-label">1 / 5</p>
+      </div>
+      <button type="button" class="icon-btn" id="btn-music" aria-pressed="false" aria-label="Activar música de fondo">
+        <svg viewBox="0 0 24 24" class="note" aria-hidden="true">
+          <path fill="currentColor" d="M9.2 17.4a2.2 2.2 0 1 1-1.7-2.15V6.3l9-1.7v8.15a2.2 2.2 0 1 1-1.6 2.12V6.7l-5.7 1.08v9.62z"/>
+          <path class="slash" d="M5 19 L19 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="story">
+    <section class="stage is-active" id="stage-1" data-stage="1" aria-label="Sorpresa">
+      <div class="wrap">
+        <p class="kicker rise" data-kicker="0"></p>
+        <h1 class="rise d1" id="title-welcome" tabindex="-1"></h1>
+        <p class="lead rise d2" id="text-welcome"></p>
+        <p class="aside hand rise d2" id="aside-welcome"></p>
+
+        <div class="rise d3">
+          <div class="envelope-scene" id="scene">
+            <button type="button" class="envelope" id="envelope" aria-label="Sobre cerrado. Tócalo si quieres; se abre con el botón de abajo.">
+              <span class="letter">
+                <span class="letter-kicker" id="env-kicker"></span>
+                <strong id="env-title"></strong>
+                <span class="env-copy" id="env-text"></span>
+              </span>
+              <span class="pocket" aria-hidden="true"></span>
+              <span class="flap" aria-hidden="true"></span>
+              <span class="seal" aria-hidden="true"><span class="seal-star">✦</span></span>
+            </button>
+          </div>
+        </div>
+
+        <p class="poke-line hand" id="poke-line" aria-live="polite"></p>
+        <button type="button" class="btn rise d4" id="btn-open">
+          <span class="spark" aria-hidden="true">✦</span>
+          <span id="label-open"></span>
+        </button>
+        <p class="footnote rise d5" id="foot-welcome"></p>
+      </div>
+    </section>
+
+    <section class="stage" id="stage-2" data-stage="2" aria-hidden="true" aria-label="Cualidades">
+      <div class="wrap">
+        <p class="kicker rise" data-kicker="1"></p>
+        <h2 class="rise d1" id="title-qualities" tabindex="-1"></h2>
+        <p class="hint rise d2" id="quality-help"></p>
+
+        <article class="qcard" id="quality-card">
+          <span class="tape" aria-hidden="true"></span>
+          <p class="qindex hand" id="q-index"></p>
+          <div class="qicon" id="q-icon"></div>
+          <h3 id="q-title"></h3>
+          <p id="q-text"></p>
+          <button type="button" class="texty" id="q-extra-btn">
+            <span id="label-note"></span>
+            <span id="label-note-close"></span>
+          </button>
+          <p class="qextra hand" id="q-extra"></p>
+        </article>
+
+        <div class="deck-nav">
+          <button type="button" class="round" id="btn-q-prev" aria-label="Tarjeta anterior">←</button>
+          <div class="dots" id="quality-dots"></div>
+          <button type="button" class="round" id="btn-q-next" aria-label="Tarjeta siguiente">→</button>
+        </div>
+        <p class="status" id="quality-status" aria-live="polite"></p>
+        <button type="button" class="btn" id="btn-qualities" disabled>
+          <span id="label-qualities"></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="stage" id="stage-3" data-stage="3" aria-hidden="true" aria-label="Razones">
+      <div class="wrap">
+        <p class="kicker rise" data-kicker="2"></p>
+        <h2 class="rise d1" id="title-reasons" tabindex="-1"></h2>
+        <p class="lead rise d2" id="text-reasons"></p>
+        <div class="grid-cards" id="reason-grid"></div>
+        <p class="status" id="reason-status" aria-live="polite"></p>
+        <button type="button" class="btn" id="btn-reasons" disabled>
+          <span id="label-reasons"></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="stage" id="stage-4" data-stage="4" aria-hidden="true" aria-label="Deseo">
+      <div class="wrap">
+        <p class="kicker rise" data-kicker="3"></p>
+        <h2 class="rise d1" id="title-wish" tabindex="-1"></h2>
+        <p class="lead rise d2" id="text-wish"></p>
+
+        <div class="cake-wrap rise d3">
+          <div class="cake size-big" id="cake">
+            <svg class="cake-svg" viewBox="0 0 320 270" role="img" aria-label="Pastel de cumpleaños con tres velas encendidas">
+              <defs>
+                <linearGradient id="tierB" x1="0" x2="1">
+                  <stop offset="0" stop-color="#e7a3ad"/>
+                  <stop offset="0.18" stop-color="#f7d0d4"/>
+                  <stop offset="1" stop-color="#f0b7c0"/>
+                </linearGradient>
+                <linearGradient id="tierT" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#fde8e4"/>
+                  <stop offset="1" stop-color="#f3c4c6"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="160" cy="248" rx="118" ry="11" fill="rgba(120,60,60,.13)"/>
+              <ellipse cx="160" cy="238" rx="126" ry="16" fill="#f0e2d2"/>
+              <ellipse cx="160" cy="234" rx="110" ry="11" fill="#fffaf4"/>
+              <rect x="50" y="156" width="220" height="74" rx="18" fill="url(#tierB)"/>
+              <rect x="50" y="156" width="220" height="16" rx="8" fill="#fff8f4"/>
+              <ellipse cx="76" cy="180" rx="10" ry="14" fill="#fff8f4"/>
+              <ellipse cx="114" cy="188" rx="9" ry="16" fill="#fff8f4"/>
+              <ellipse cx="154" cy="178" rx="8" ry="12" fill="#fff8f4"/>
+              <ellipse cx="198" cy="190" rx="11" ry="17" fill="#fff8f4"/>
+              <ellipse cx="242" cy="180" rx="9" ry="13" fill="#fff8f4"/>
+              <g fill="#fff" opacity=".95">
+                <circle cx="78" cy="216" r="3.1"/>
+                <circle cx="102" cy="220" r="3.1"/>
+                <circle cx="126" cy="216" r="3.1"/>
+                <circle cx="150" cy="220" r="3.1"/>
+                <circle cx="174" cy="216" r="3.1"/>
+                <circle cx="198" cy="220" r="3.1"/>
+                <circle cx="222" cy="216" r="3.1"/>
+                <circle cx="246" cy="220" r="3.1"/>
+              </g>
+              <g class="sprinkles">
+                <rect x="68" y="198" width="12" height="4" rx="2" fill="#f2d48a" transform="rotate(-18 74 200)"/>
+                <rect x="104" y="204" width="10" height="4" rx="2" fill="#d9c6ee" transform="rotate(14 109 206)"/>
+                <rect x="176" y="198" width="12" height="4" rx="2" fill="#fff" transform="rotate(-10 182 200)"/>
+                <rect x="214" y="206" width="11" height="4" rx="2" fill="#b7d4c8" transform="rotate(18 219 208)"/>
+                <rect x="246" y="196" width="10" height="4" rx="2" fill="#f2d48a" transform="rotate(-8 251 198)"/>
+              </g>
+              <g class="sprinkles-extra">
+                <rect x="86" y="190" width="9" height="3.5" rx="2" fill="#e08b7c" transform="rotate(22 90 192)"/>
+                <rect x="136" y="206" width="11" height="4" rx="2" fill="#f2d48a" transform="rotate(-18 141 208)"/>
+                <rect x="192" y="192" width="10" height="3.5" rx="2" fill="#d9c6ee" transform="rotate(10 197 194)"/>
+                <rect x="230" y="198" width="9" height="3.5" rx="2" fill="#fff" transform="rotate(-22 234 200)"/>
+              </g>
+              <rect x="84" y="104" width="152" height="64" rx="16" fill="url(#tierT)"/>
+              <ellipse cx="160" cy="110" rx="76" ry="15" fill="#fffaf6"/>
+              <ellipse cx="138" cy="106" rx="26" ry="6" fill="#fff" opacity=".55"/>
+              <ellipse cx="118" cy="136" rx="10" ry="15" fill="#fffaf6"/>
+              <ellipse cx="156" cy="144" rx="9" ry="17" fill="#fffaf6"/>
+              <ellipse cx="200" cy="134" rx="11" ry="14" fill="#fffaf6"/>
+              <ellipse cx="226" cy="140" rx="8" ry="14" fill="#fffaf6"/>
+              <g transform="translate(76,86)">
+                <path d="M16 10c0 0-10 8-10 18a10 10 0 0 0 20 0c0-10-10-18-10-18z" fill="#d4536a"/>
+                <path d="M10 12c2-6 6-8 6-8s4 2 6 8" fill="none" stroke="#5f8f6a" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M16 4c-1.6 2.4-1.2 4.2.4 5.2 1.2-2 1.2-3.6-.4-5.2z" fill="#5f8f6a"/>
+                <circle cx="13" cy="22" r="1" fill="#fff" opacity=".7"/>
+              </g>
+              <g transform="translate(214,90) scale(.88)">
+                <path d="M16 10c0 0-10 8-10 18a10 10 0 0 0 20 0c0-10-10-18-10-18z" fill="#c44760"/>
+                <path d="M10 12c2-6 6-8 6-8s4 2 6 8" fill="none" stroke="#5f8f6a" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M16 4c-1.6 2.4-1.2 4.2.4 5.2 1.2-2 1.2-3.6-.4-5.2z" fill="#5f8f6a"/>
+              </g>
+              <g class="candle" transform="translate(124,48)">
+                <g class="candle-body">
+                  <rect class="hit" x="-8" y="0" width="28" height="86" fill="transparent"/>
+                  <rect x="0" y="26" width="12" height="48" rx="3" fill="#f6e7a8"/>
+                  <rect x="4.8" y="20" width="2.4" height="8" rx="1" fill="#5c4038"/>
+                  <g class="flame">
+                    <ellipse cx="6" cy="12" rx="7" ry="11" fill="#ffb020"/>
+                    <ellipse cx="6" cy="14" rx="3.2" ry="6" fill="#fff6d2"/>
+                  </g>
+                  <g class="smoke">
+                    <circle cx="6" cy="2" r="3.2" fill="#d9d3cf"/>
+                    <circle cx="12" cy="-4" r="2.2" fill="#e6e1dd"/>
+                  </g>
+                </g>
+              </g>
+              <g class="candle" transform="translate(154,34)">
+                <g class="candle-body">
+                  <rect class="hit" x="-8" y="-6" width="28" height="96" fill="transparent"/>
+                  <rect x="0" y="22" width="12" height="58" rx="3" fill="#f4c7d4"/>
+                  <rect x="4.8" y="16" width="2.4" height="8" rx="1" fill="#5c4038"/>
+                  <g class="flame">
+                    <ellipse cx="6" cy="8" rx="7.6" ry="12" fill="#ffc14d"/>
+                    <ellipse cx="6" cy="10" rx="3.3" ry="6.4" fill="#fff6d2"/>
+                  </g>
+                  <g class="smoke">
+                    <circle cx="6" cy="-2" r="3.4" fill="#d9d3cf"/>
+                    <circle cx="13" cy="-8" r="2.3" fill="#e6e1dd"/>
+                  </g>
+                </g>
+              </g>
+              <g class="candle" transform="translate(186,50)">
+                <g class="candle-body">
+                  <rect class="hit" x="-8" y="0" width="28" height="84" fill="transparent"/>
+                  <rect x="0" y="26" width="12" height="46" rx="3" fill="#e4d4f2"/>
+                  <rect x="4.8" y="20" width="2.4" height="8" rx="1" fill="#5c4038"/>
+                  <g class="flame">
+                    <ellipse cx="6" cy="12" rx="6.6" ry="10.5" fill="#ffb020"/>
+                    <ellipse cx="6" cy="14" rx="3" ry="5.6" fill="#fff6d2"/>
+                  </g>
+                  <g class="smoke">
+                    <circle cx="6" cy="2" r="3" fill="#d9d3cf"/>
+                    <circle cx="1" cy="-3" r="2.1" fill="#e6e1dd"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="wind" id="wind" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <p class="hand cake-note" id="cake-note"></p>
+        </div>
+
+        <div class="wish-setup" id="wish-setup">
+          <div class="chips" id="chips" role="group" aria-label="Tamaño del deseo"></div>
+          <p class="hint" id="wish-hint"></p>
+          <button type="button" class="btn" id="btn-wish">
+            <span id="label-wish"></span>
+          </button>
+        </div>
+
+        <div class="wish-result" id="wish-result">
+          <p class="fortune" id="fortune" tabindex="-1"></p>
+          <button type="button" class="btn" id="btn-letter">
+            <span id="label-letter"></span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" id="stage-5" data-stage="5" aria-hidden="true" aria-label="Carta">
+      <div class="wrap">
+        <p class="kicker rise" data-kicker="4"></p>
+        <article class="letter-sheet" id="letter">
+          <svg class="flor flor-tl" viewBox="0 0 80 80" aria-hidden="true">
+            <path d="M24 62c8-16 10-28 6-40" fill="none" stroke="#6f947c" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M26 48c8 1 16-2 20-8" fill="none" stroke="#6f947c" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="34" cy="22" r="7" fill="#f3b7c4"/>
+            <circle cx="46" cy="18" r="5.5" fill="#f7d0dc"/>
+            <circle cx="24" cy="16" r="5" fill="#e7c6e4"/>
+            <circle cx="36" cy="14" r="3.2" fill="#f2d48a"/>
+          </svg>
+          <svg class="flor flor-br" viewBox="0 0 80 80" aria-hidden="true">
+            <path d="M24 62c8-16 10-28 6-40" fill="none" stroke="#6f947c" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M26 48c8 1 16-2 20-8" fill="none" stroke="#6f947c" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="34" cy="22" r="7" fill="#f3b7c4"/>
+            <circle cx="46" cy="18" r="5.5" fill="#f7d0dc"/>
+            <circle cx="24" cy="16" r="5" fill="#e7c6e4"/>
+            <circle cx="36" cy="14" r="3.2" fill="#f2d48a"/>
+          </svg>
+          <p class="stamp" id="stamp"></p>
+          <h2 id="letter-title" tabindex="-1"></h2>
+          <div class="letter-body" id="letter-body"></div>
+          <figure class="mini-show" id="photo-row" hidden>
+            <figcaption class="mini-line" id="photo-line"></figcaption>
+            <div class="mini-stage">
+              <button type="button" class="mini-nav" id="photo-prev" aria-label="Foto anterior">‹</button>
+              <div class="mini-viewport" id="photo-viewport">
+                <div class="mini-track" id="photo-track"></div>
+              </div>
+              <button type="button" class="mini-nav" id="photo-next" aria-label="Foto siguiente">›</button>
+            </div>
+            <div class="mini-dots" id="photo-dots" role="tablist" aria-label="Fotos de pequeña"></div>
+            <p class="mini-note" id="photo-note"></p>
+          </figure>
+          <div class="rule" aria-hidden="true"></div>
+          <p class="line cierre" id="cierre-1"></p>
+          <p class="line cierre cierre-last" id="cierre-2"></p>
+          <p class="sign-off" id="sign-off"></p>
+          <p class="signature" id="sign-name"></p>
+
+          <div class="funzone">
+            <button type="button" class="texty" id="btn-posdata" aria-expanded="false" aria-controls="posdata">
+              <span id="label-posdata"></span>
+            </button>
+            <p class="posdata" id="posdata" hidden></p>
+            <p class="react-q" id="react-question"></p>
+            <div class="reacts" id="reacts" role="group" aria-label="Tu reacción"></div>
+            <p id="react-note" aria-live="polite"></p>
+            <div class="actions">
+              <button type="button" class="btn btn-ghost" id="btn-reread">
+                <span id="label-reread"></span>
+              </button>
+              <button type="button" class="btn btn-ghost" id="btn-restart">
+                <span id="label-restart"></span>
+              </button>
+            </div>
+            <div class="confirm" id="restart-dialog" hidden>
+              <p id="restart-text"></p>
+              <div class="confirm-actions">
+                <button type="button" class="btn" id="btn-restart-yes">
+                  <span id="label-restart-yes"></span>
+                </button>
+                <button type="button" class="btn btn-ghost" id="btn-restart-no">
+                  <span id="label-restart-no"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="final-note" id="final-note">
+            <div class="rule" aria-hidden="true"></div>
+            <svg class="final-heart" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40s-12-7.6-12-16a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 8.4-12 16-12 16z" fill="currentColor"/></svg>
+            <p class="final-line" id="final-line"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <noscript>
+    <p class="noscript">Esta sorpresa necesita JavaScript para abrirse. Actívalo y vuelve a cargar la página.</p>
+  </noscript>
+  <script src="js/script.js"></script>
+</body>
+</html>
